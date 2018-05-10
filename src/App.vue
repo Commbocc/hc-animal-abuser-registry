@@ -1,60 +1,59 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-    </ul>
+
+    <!-- filter -->
+    <form class="form-inline">
+      <label class="sr-only" for="filterSearch">Search</label>
+      <input v-model="filterSearch" id="filterSearch" class="form-control mr-sm-2 mb-2" placeholder="Search">
+
+      <label class="sr-only" for="filterSort">Sort By</label>
+      <select v-model="filterSort" id="" class="form-control mr-sm-2 mb-2">
+        <option value="" disabled>Sort By...</option>
+        <option value="latestConvictionDate">Conviction Date</option>
+        <option value="name">Name</option>
+        <option value="dob">Date of Birth</option>
+        <!-- <option value="address">Address</option> -->
+      </select>
+
+      <label class="sr-only" for="filterOrder">Order</label>
+      <select v-model="filterOrder" id="filterOrder" class="form-control mr-sm-2 mb-2">
+        <option value="" disabled>Order...</option>
+        <option value="asc">Ascending</option>
+        <option value="desc">Descending</option>
+      </select>
+
+      <button type="reset" @click.prevent="reset" class="btn btn-primary mb-2">Reset</button>
+    </form>
+
+    <!-- abusers index -->
+    <div v-for="abuser in filteredAbusers" is="AbuserTemplate" :abuser="abuser"></div>
+
   </div>
 </template>
 
 <script>
+import Abuser from './models/Abuser'
+import AbuserTemplate from './components/Abuser'
+
 export default {
   name: 'app',
+  components: { AbuserTemplate },
+  mixins: [Abuser.mixin],
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      filterSearch: null,
+      filterSort: 'latestConvictionDate',
+      filterOrder: 'desc'
+    }
+  },
+  methods: {
+    reset () {
+      this.filterSearch = null
+      this.filterSort = 'latestConvictionDate'
+      this.filterOrder = 'desc'
     }
   }
 }
 </script>
 
-<style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-
-h1, h2 {
-  font-weight: normal;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
-}
-</style>
+<style src="./assets/main.scss" lang="scss"></style>

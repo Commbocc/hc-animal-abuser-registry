@@ -1,0 +1,60 @@
+<template lang="html">
+  <div class="abuser p-3">
+    <div class="row">
+      <div class="col-md-3">
+        <p class="text-center">
+
+          <img v-if="abuser.imgSrc" :src="abuser.imgSrc" :alt="abuser.name" class="img-responsive center-block img-fluid mx-auto" />
+          <span v-else class="h2 thumbnail">
+            <i class="fa fa-user fa-5x"></i><br>
+            No Image
+          </span>
+
+        </p>
+      </div>
+      <div class="col-md-9">
+
+        <dl class="dl-horizontal">
+          <dt>Name</dt>
+          <dd>{{ abuser.name }}</dd>
+
+          <dt v-if="abuser.aliases">Alias(es)</dt>
+          <dd v-if="abuser.aliases">{{ abuser.aliases }}</dd>
+
+          <dt>Date of Birth</dt>
+          <dd>{{ abuser.dob.toLocaleDateString() }}</dd>
+
+          <dt>Address</dt>
+          <dd>{{ abuser.address }}</dd>
+
+          <dt v-if="abuser.offenses.length">Offenses</dt>
+          <dd v-if="abuser.offenses.length">
+            <ul>
+              <li v-for="offense in abuser.offenses">
+
+                <ul class="list-unstyled">
+                  <li>{{ offense.counts }} count(s) of {{ offense.description }}</li>
+                  <li><em>Conviction Date:</em> {{ offense.convictionDate.toLocaleDateString() }}</li>
+                  <li v-if="offense.judgement">
+                    <a :href="offense.judgement" target="_blank">
+                      View Judgment and Sentence
+                    </a>
+                  </li>
+                </ul>
+
+              </li>
+            </ul>
+          </dd>
+        </dl>
+
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'Abuser',
+  props: ['abuser']
+}
+</script>
