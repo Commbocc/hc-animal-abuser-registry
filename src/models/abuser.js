@@ -18,7 +18,10 @@ function Abuser (data) {
 Abuser.mixin = {
   data () {
     return {
-      abusers: []
+      abusers: [],
+      filterSearch: null,
+      filterSort: 'latestConvictionDate',
+      filterOrder: 'desc'
     }
   },
   methods: {
@@ -33,6 +36,11 @@ Abuser.mixin = {
         let preds = [a.name, a.aliases, a.address]
         return _.includes(preds.map(p => p.toLowerCase()).join(' '), term.toLowerCase())
       })
+    },
+    resetFilters () {
+      this.filterSearch = null
+      this.filterSort = 'latestConvictionDate'
+      this.filterOrder = 'desc'
     }
   },
   computed: {

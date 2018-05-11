@@ -22,7 +22,7 @@
         <option value="desc">Descending</option>
       </select>
 
-      <button type="reset" @click.prevent="reset" class="btn btn-primary mb-2">Reset</button>
+      <button type="reset" @click.prevent="resetFilters" class="btn btn-primary mb-2">Reset</button>
     </form>
 
     <!-- abusers index -->
@@ -38,21 +38,7 @@ import AbuserTemplate from './components/Abuser'
 export default {
   name: 'app',
   components: { AbuserTemplate },
-  mixins: [Abuser.mixin],
-  data () {
-    return {
-      filterSearch: null,
-      filterSort: 'latestConvictionDate',
-      filterOrder: 'desc'
-    }
-  },
-  methods: {
-    reset () {
-      this.filterSearch = null
-      this.filterSort = 'latestConvictionDate'
-      this.filterOrder = 'desc'
-    }
-  }
+  mixins: [Abuser.mixin]
 }
 </script>
 
