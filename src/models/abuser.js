@@ -33,8 +33,8 @@ Abuser.mixin = {
     },
     searchAbusers (term) {
       return _.filter(this.abusers, a => {
-        let preds = [a.name, a.aliases, a.address]
-        return _.includes(preds.map(p => p.toLowerCase()).join(' '), term.toLowerCase())
+        let props = [a.name, a.aliases, a.address]
+        return _.includes(props.join(' ').toLowerCase(), term.toLowerCase())
       })
     },
     resetFilters () {
