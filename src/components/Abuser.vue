@@ -22,7 +22,7 @@
           <dd v-if="abuser.aliases">{{ abuser.aliases }}</dd>
 
           <dt>Date of Birth</dt>
-          <dd>{{ abuser.dob.toLocaleDateString() }}</dd>
+          <dd>{{ abuser.dob.format('ll') }}</dd>
 
           <dt>Address</dt>
           <dd>{{ abuser.address }}</dd>
@@ -34,7 +34,7 @@
 
                 <ul class="list-unstyled">
                   <li>{{ offense.counts }} count(s) of {{ offense.description }}</li>
-                  <li><em>Conviction Date:</em> {{ offense.convictionDate.toLocaleDateString() }}</li>
+                  <li><em>Conviction Date:</em> {{ offense.convictionDate.format('ll') }}</li>
                   <li v-if="offense.judgement">
                     <a :href="offense.judgement" target="_blank">
                       View Judgment and Sentence

@@ -1,11 +1,12 @@
 import _ from 'lodash'
+import moment from 'moment'
 import Offense from './offense'
 
 function Abuser (data) {
   this.imgSrc = data['Head Photo']
   this.name = data['name']
   this.aliases = data['alias']
-  this.dob = new Date(data['DOB'])
+  this.dob = moment(data['DOB'], 'MM-DD-YYYY')
   this.address = data['address']
 
   let offenses = data['offenses'].map(o => new Offense(o))
