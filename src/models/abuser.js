@@ -1,4 +1,5 @@
-import _ from 'lodash'
+import { orderBy as _orderBy, first as _first, includes as _includes, filter as _filter } from 'lodash'
+import axios from 'axios'
 import moment from 'moment'
 import Offense from './offense'
 
@@ -10,31 +11,29 @@ function Abuser (data) {
   this.address = data['address']
 
   let offenses = data['offenses'].map(o => new Offense(o))
-  this.offenses = _.orderBy(offenses, 'convictionDate', 'desc')
+  this.offenses = _orderBy(offenses, 'convictionDate', 'desc')
 
-  this.latestConvictionDate = _.first(this.offenses).convictionDate
+  this.latestConvictionDate = _first(this.offenses).convictionDate
 }
 
 Abuser.mixin = {
-  data () {
-    return {
-      abusers: [],
-      filterSearch: null,
-      filterSort: 'latestConvictionDate',
-      filterOrder: 'desc'
-    }
-  },
+  data: () => ({
+    abusers: [],
+    filterSearch: null,
+    filterSort: 'latestConvictionDate',
+    filterOrder: 'desc'
+  }),
   methods: {
     fetchAbusers () {
       let apiUrl = 'https://apex-pub.hillsboroughcounty.org/apex/bocc.caar_get_json'
-      fetch(apiUrl).then(res => res.json()).then(json => {
-        this.abusers = json['abuser registry']['abusers'].map(a => new Abuser(a))
+      axios.get(apiUrl).then(response => {
+        this.abusers = response.data['abuser registry']['abusers'].map(a => new Abuser(a))
       })
     },
     searchAbusers (term) {
-      return _.filter(this.abusers, a => {
+      return _filter(this.abusers, a => {
         let props = [a.name, a.aliases, a.address]
-        return _.includes(props.join(' ').toLowerCase(), term.toLowerCase())
+        return _includes(props.join(' ').toLowerCase(), term.toLowerCase())
       })
     },
     resetFilters () {
@@ -46,7 +45,7 @@ Abuser.mixin = {
   computed: {
     filteredAbusers () {
       let abusers = (this.filterSearch) ? this.searchAbusers(this.filterSearch) : this.abusers
-      return _.orderBy(abusers, this.filterSort, this.filterOrder)
+      return _orderBy(abusers, this.filterSort, this.filterOrder)
     }
   },
   mounted () {

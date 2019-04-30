@@ -1,0 +1,7 @@
+.abuser {
+  border-top: solid 1px #b7b7b7;
+}
+
+.abuser:nth-of-type(odd) {
+  background: #E3EAEE;
+}

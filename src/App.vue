@@ -26,13 +26,13 @@
     </form>
 
     <!-- abusers index -->
-    <div v-for="abuser in filteredAbusers" is="AbuserTemplate" :abuser="abuser"></div>
+    <div v-for="(abuser, i) in filteredAbusers" :key="i" is="AbuserTemplate" :abuser="abuser"></div>
 
   </div>
 </template>
 
 <script>
-import Abuser from './models/Abuser'
+import Abuser from './models/abuser'
 import AbuserTemplate from './components/Abuser'
 
 export default {
@@ -42,4 +42,4 @@ export default {
 }
 </script>
 
-<style src="./assets/main.scss" lang="scss"></style>
+<style src="./assets/main.css"></style>
