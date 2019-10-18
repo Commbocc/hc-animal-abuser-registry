@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div>
 
     <!-- filter -->
     <form class="form-inline">
@@ -37,7 +37,12 @@ import AbuserTemplate from './components/Abuser'
 
 let App; export default App = {
   install (Vue) {
-    Vue.component('HcAnimalAbuserRegistry', this)
+    Vue.mixin({
+      components: {
+        HcAnimalAbuserRegistry: this
+      }
+    })
+    // Vue.component('HcAnimalAbuserRegistry', this)
   },
   components: { AbuserTemplate },
   mixins: [Abuser.mixin]
