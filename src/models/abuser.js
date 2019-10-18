@@ -1,6 +1,7 @@
 import _ from 'lodash'
 import moment from 'moment'
-import Offense from './offense'
+import axios from 'axios'
+import Offense from './Offense'
 
 export default class Abuser {
   constructor (data) {
@@ -28,8 +29,8 @@ export default class Abuser {
         fetchAbusers () {
           let apiUrl = 'https://apex-pub.hillsboroughcounty.org/apex/bocc.caar_get_json'
           // let apiUrl = 'https://public-solutions.hillsboroughcounty.org/enterprise/pub_prod.caar_get_json'
-          fetch(apiUrl, {credentials: 'include'}).then(res => res.json()).then(json => {
-            this.abusers = json['abuser registry']['abusers'].map(a => new Abuser(a))
+          axios.get(apiUrl).then(res => {
+            this.abusers = res.data['abuser registry']['abusers'].map(a => new Abuser(a))
           })
         },
         searchAbusers (term) {

@@ -26,7 +26,7 @@
     </form>
 
     <!-- abusers index -->
-    <div v-for="abuser in filteredAbusers" is="AbuserTemplate" :abuser="abuser"></div>
+    <div v-for="(abuser, i) in filteredAbusers" is="AbuserTemplate" :key="i" :abuser="abuser"></div>
 
   </div>
 </template>
@@ -35,10 +35,16 @@
 import Abuser from './models/Abuser'
 import AbuserTemplate from './components/Abuser'
 
-export default {
-  name: 'app',
+let App; export default App = {
+  install (Vue) {
+    Vue.component('HcAnimalAbuserRegistry', this)
+  },
   components: { AbuserTemplate },
   mixins: [Abuser.mixin]
+}
+
+if (typeof window !== 'undefined' && window.Vue) {
+  window.Vue.use(App)
 }
 </script>
 

@@ -30,7 +30,7 @@
           <dt v-if="abuser.offenses.length">Offenses</dt>
           <dd v-if="abuser.offenses.length">
             <ul>
-              <li v-for="offense in abuser.offenses">
+              <li v-for="(offense, i) in abuser.offenses" :key="i">
 
                 <ul class="list-unstyled">
                   <li>{{ offense.counts }} count(s) of {{ offense.description }}</li>
