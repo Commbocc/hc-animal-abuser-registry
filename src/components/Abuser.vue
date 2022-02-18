@@ -11,7 +11,7 @@ const formatDate = (datetime) => {
 <template>
   <div class="card card-body abuser my-3">
     <div class="row">
-      <div class="col-md-3">
+      <div class="col-sm-4">
         <p class="text-center">
           <img
             v-if="abuser.imgSrc"
@@ -25,7 +25,7 @@ const formatDate = (datetime) => {
           </span>
         </p>
       </div>
-      <div class="col-md-9">
+      <div class="col-sm-8">
         <dl class="dl-horizontal">
           <dt>Name</dt>
           <dd>{{ abuser.name }}</dd>
