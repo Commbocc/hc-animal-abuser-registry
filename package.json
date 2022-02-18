@@ -1,26 +1,24 @@
 {
-  "name": "hc-animal-abuser-registry",
-  "version": "0.1.0",
-  "private": true,
+  "name": "hc-vite-template",
+  "version": "0.0.0",
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build --target lib --name HcAnimalAbuserRegistry --formats umd-min",
-    "lint": "vue-cli-service lint"
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview",
+    "lint": "eslint --ext .js,.vue src"
   },
   "dependencies": {
-    "axios": "^0.19.0",
-    "core-js": "^3.1.2",
-    "lodash": "^4.17.15",
-    "moment": "^2.24.0",
-    "vue": "^2.6.10"
+    "bootstrap": "^5.0.0-beta3",
+    "iframe-resizer": "^4.3.1",
+    "lodash": "^4.17.21",
+    "vue": "^3.0.5"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^4.0.0",
-    "@vue/cli-plugin-eslint": "^4.0.0",
-    "@vue/cli-service": "^4.0.0",
-    "babel-eslint": "^10.0.1",
-    "eslint": "^5.16.0",
-    "eslint-plugin-vue": "^5.0.0",
-    "vue-template-compiler": "^2.6.10"
+    "@vitejs/plugin-vue": "^1.2.1",
+    "@vue/compiler-sfc": "^3.0.5",
+    "eslint": "^7.24.0",
+    "eslint-plugin-vue": "^7.9.0",
+    "sass": "^1.32.8",
+    "vite": "^2.1.5"
   }
 }
