@@ -1,12 +1,12 @@
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
+import { defineConfig } from "vite";
+import vue from "@vitejs/plugin-vue";
 // import { resolve } from 'path'
-import { API_URL } from './src/lib'
+import { API_URL } from "./src/lib";
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [vue()],
-  base: './',
+  base: "./",
   // build: {
   //   lib: {
   //     entry: resolve(__dirname, 'src/main.js'),
@@ -15,11 +15,11 @@ export default defineConfig({
   // },
   server: {
     proxy: {
-      '/api': {
+      "/api": {
         target: API_URL,
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ''),
+        rewrite: (path) => path.replace(/^\/api/, ""),
       },
     },
   },
-})
+});
