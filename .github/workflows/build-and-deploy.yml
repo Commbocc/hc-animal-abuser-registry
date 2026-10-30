@@ -2,19 +2,19 @@ name: Build and Deploy
 on:
   push:
     branches:
-      - "main"
+      - main
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout 🛎️
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Install and Build 🔧
         run: |
           yarn
           yarn build
-
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:

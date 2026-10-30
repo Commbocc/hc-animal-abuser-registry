@@ -1,34 +1,23 @@
-<script setup>
-import { abusers, filteredAbusers, fetchAbusers } from './lib'
-import Filters from './components/Filters.vue'
-import Abuser from './components/Abuser.vue'
+<script setup lang="ts">
+import { abusers, fetchAbusers } from "./lib/abusers";
+import AbuserList from "./components/AbuserList.vue";
 
-fetchAbusers()
+fetchAbusers();
+
+const containerClass = import.meta.env.DEV
+  ? "py-5 container"
+  : "container-fluid pt-2";
 </script>
 
-<style lang="scss" src="./assets/main.scss"></style>
-
 <template>
-  <div>
-    <!-- filters -->
-    <Filters />
-
-    <!-- loading -->
-    <div v-if="abusers.loading" class="d-flex justify-content-center">
-      <div class="spinner-border" role="status">
-        <span class="visually-hidden">Loading...</span>
-      </div>
+  <div v-if="abusers.loading" class="d-flex justify-content-center">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
     </div>
-    <!-- error -->
-    <div v-else-if="abusers.error" class="alert alert-warning">
-      {{ abusers.error }}
-    </div>
-    <!-- index -->
-    <Abuser
-      v-else
-      v-for="(abuser, i) in filteredAbusers"
-      :key="i"
-      :abuser="abuser"
-    />
   </div>
+
+  <article v-else :class="containerClass">
+    <p v-if="!abusers.data.length">There are currently no abusers registered.</p>
+    <AbuserList />
+  </article>
 </template>
